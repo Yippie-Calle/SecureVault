@@ -24,25 +24,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		44D1D17E2DAE88D20092E4A8 /* SecureFileVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecureFileVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		44D1D18D2DAE88D30092E4A8 /* SecureFileVaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureFileVaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		44D1D1972DAE88D30092E4A8 /* SecureFileVaultUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureFileVaultUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		44D1D17E2DAE88D20092E4A8 /* SecureVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecureVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44D1D18D2DAE88D30092E4A8 /* SecureVaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureVaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		44D1D1972DAE88D30092E4A8 /* SecureVaultUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureVaultUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		44B430A72DAEB25300647602 /* Exceptions for "SecureFileVault" folder in "SecureVault" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			assetTagsByRelativePath = {
+				Resources/CompanyLogo.PNG = (Image, );
+			};
+			target = 44D1D17D2DAE88D20092E4A8 /* SecureVault */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		44D1D1802DAE88D20092E4A8 /* SecureFileVault */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				44B430A72DAEB25300647602 /* Exceptions for "SecureFileVault" folder in "SecureVault" target */,
+			);
 			path = SecureFileVault;
 			sourceTree = "<group>";
 		};
-		44D1D1902DAE88D30092E4A8 /* SecureFileVaultTests */ = {
+		44D1D1902DAE88D30092E4A8 /* SecureVaultTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SecureFileVaultTests;
+			path = SecureVaultTests;
 			sourceTree = "<group>";
 		};
-		44D1D19A2DAE88D30092E4A8 /* SecureFileVaultUITests */ = {
+		44D1D19A2DAE88D30092E4A8 /* SecureVaultUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SecureFileVaultUITests;
+			path = SecureVaultUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,8 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				44D1D1802DAE88D20092E4A8 /* SecureFileVault */,
-				44D1D1902DAE88D30092E4A8 /* SecureFileVaultTests */,
-				44D1D19A2DAE88D30092E4A8 /* SecureFileVaultUITests */,
+				44D1D1902DAE88D30092E4A8 /* SecureVaultTests */,
+				44D1D19A2DAE88D30092E4A8 /* SecureVaultUITests */,
 				44D1D17F2DAE88D20092E4A8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +98,9 @@
 		44D1D17F2DAE88D20092E4A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				44D1D17E2DAE88D20092E4A8 /* SecureFileVault.app */,
-				44D1D18D2DAE88D30092E4A8 /* SecureFileVaultTests.xctest */,
-				44D1D1972DAE88D30092E4A8 /* SecureFileVaultUITests.xctest */,
+				44D1D17E2DAE88D20092E4A8 /* SecureVault.app */,
+				44D1D18D2DAE88D30092E4A8 /* SecureVaultTests.xctest */,
+				44D1D1972DAE88D30092E4A8 /* SecureVaultUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		44D1D17D2DAE88D20092E4A8 /* SecureFileVault */ = {
+		44D1D17D2DAE88D20092E4A8 /* SecureVault */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 44D1D1A12DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVault" */;
+			buildConfigurationList = 44D1D1A12DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVault" */;
 			buildPhases = (
 				44D1D17A2DAE88D20092E4A8 /* Sources */,
 				44D1D17B2DAE88D20092E4A8 /* Frameworks */,
@@ -110,16 +123,16 @@
 			fileSystemSynchronizedGroups = (
 				44D1D1802DAE88D20092E4A8 /* SecureFileVault */,
 			);
-			name = SecureFileVault;
+			name = SecureVault;
 			packageProductDependencies = (
 			);
 			productName = SecureFileVault;
-			productReference = 44D1D17E2DAE88D20092E4A8 /* SecureFileVault.app */;
+			productReference = 44D1D17E2DAE88D20092E4A8 /* SecureVault.app */;
 			productType = "com.apple.product-type.application";
 		};
-		44D1D18C2DAE88D30092E4A8 /* SecureFileVaultTests */ = {
+		44D1D18C2DAE88D30092E4A8 /* SecureVaultTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 44D1D1A42DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVaultTests" */;
+			buildConfigurationList = 44D1D1A42DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVaultTests" */;
 			buildPhases = (
 				44D1D1892DAE88D30092E4A8 /* Sources */,
 				44D1D18A2DAE88D30092E4A8 /* Frameworks */,
@@ -131,18 +144,18 @@
 				44D1D18F2DAE88D30092E4A8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				44D1D1902DAE88D30092E4A8 /* SecureFileVaultTests */,
+				44D1D1902DAE88D30092E4A8 /* SecureVaultTests */,
 			);
-			name = SecureFileVaultTests;
+			name = SecureVaultTests;
 			packageProductDependencies = (
 			);
 			productName = SecureFileVaultTests;
-			productReference = 44D1D18D2DAE88D30092E4A8 /* SecureFileVaultTests.xctest */;
+			productReference = 44D1D18D2DAE88D30092E4A8 /* SecureVaultTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		44D1D1962DAE88D30092E4A8 /* SecureFileVaultUITests */ = {
+		44D1D1962DAE88D30092E4A8 /* SecureVaultUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 44D1D1A72DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVaultUITests" */;
+			buildConfigurationList = 44D1D1A72DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVaultUITests" */;
 			buildPhases = (
 				44D1D1932DAE88D30092E4A8 /* Sources */,
 				44D1D1942DAE88D30092E4A8 /* Frameworks */,
@@ -154,13 +167,13 @@
 				44D1D1992DAE88D30092E4A8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				44D1D19A2DAE88D30092E4A8 /* SecureFileVaultUITests */,
+				44D1D19A2DAE88D30092E4A8 /* SecureVaultUITests */,
 			);
-			name = SecureFileVaultUITests;
+			name = SecureVaultUITests;
 			packageProductDependencies = (
 			);
 			productName = SecureFileVaultUITests;
-			productReference = 44D1D1972DAE88D30092E4A8 /* SecureFileVaultUITests.xctest */;
+			productReference = 44D1D1972DAE88D30092E4A8 /* SecureVaultUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -170,6 +183,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					Image,
+				);
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
@@ -186,7 +202,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 44D1D1792DAE88D20092E4A8 /* Build configuration list for PBXProject "SecureFileVault" */;
+			buildConfigurationList = 44D1D1792DAE88D20092E4A8 /* Build configuration list for PBXProject "SecureVault" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +216,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				44D1D17D2DAE88D20092E4A8 /* SecureFileVault */,
-				44D1D18C2DAE88D30092E4A8 /* SecureFileVaultTests */,
-				44D1D1962DAE88D30092E4A8 /* SecureFileVaultUITests */,
+				44D1D17D2DAE88D20092E4A8 /* SecureVault */,
+				44D1D18C2DAE88D30092E4A8 /* SecureVaultTests */,
+				44D1D1962DAE88D30092E4A8 /* SecureVaultUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +274,12 @@
 /* Begin PBXTargetDependency section */
 		44D1D18F2DAE88D30092E4A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 44D1D17D2DAE88D20092E4A8 /* SecureFileVault */;
+			target = 44D1D17D2DAE88D20092E4A8 /* SecureVault */;
 			targetProxy = 44D1D18E2DAE88D30092E4A8 /* PBXContainerItemProxy */;
 		};
 		44D1D1992DAE88D30092E4A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 44D1D17D2DAE88D20092E4A8 /* SecureFileVault */;
+			target = 44D1D17D2DAE88D20092E4A8 /* SecureVault */;
 			targetProxy = 44D1D1982DAE88D30092E4A8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -305,6 +321,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -370,6 +387,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -397,6 +415,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = SecureFileVault/Resources/CompanyLogo.PNG;
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -425,6 +444,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = SecureFileVault/Resources/CompanyLogo.PNG;
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -461,7 +481,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureFileVault.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SecureFileVault";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureVault.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SecureVault";
 			};
 			name = Debug;
 		};
@@ -480,7 +500,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureFileVault.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SecureFileVault";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureVault.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SecureVault";
 			};
 			name = Release;
 		};
@@ -521,7 +541,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		44D1D1792DAE88D20092E4A8 /* Build configuration list for PBXProject "SecureFileVault" */ = {
+		44D1D1792DAE88D20092E4A8 /* Build configuration list for PBXProject "SecureVault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				44D1D19F2DAE88D30092E4A8 /* Debug */,
@@ -530,7 +550,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		44D1D1A12DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVault" */ = {
+		44D1D1A12DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				44D1D1A22DAE88D30092E4A8 /* Debug */,
@@ -539,7 +559,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		44D1D1A42DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVaultTests" */ = {
+		44D1D1A42DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVaultTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				44D1D1A52DAE88D30092E4A8 /* Debug */,
@@ -548,7 +568,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		44D1D1A72DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureFileVaultUITests" */ = {
+		44D1D1A72DAE88D30092E4A8 /* Build configuration list for PBXNativeTarget "SecureVaultUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				44D1D1A82DAE88D30092E4A8 /* Debug */,

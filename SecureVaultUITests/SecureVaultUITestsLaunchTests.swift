@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class SecureFileVaultUITestsLaunchTests: XCTestCase {
+final class SecureVaultUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
