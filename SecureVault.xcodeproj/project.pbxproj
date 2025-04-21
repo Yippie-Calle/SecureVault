@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44B430AC2DB0867A00647602 /* SecureVault-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SecureVault-Info.plist"; sourceTree = "<group>"; };
 		44D1D17E2DAE88D20092E4A8 /* SecureVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecureVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D1D18D2DAE88D30092E4A8 /* SecureVaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureVaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D1D1972DAE88D30092E4A8 /* SecureVaultUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecureVaultUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,7 +34,7 @@
 		44B430A72DAEB25300647602 /* Exceptions for "SecureFileVault" folder in "SecureVault" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			assetTagsByRelativePath = {
-				Resources/CompanyLogo.PNG = (Image, );
+				Resources/CompanyLogo.png = (Image, );
 			};
 			target = 44D1D17D2DAE88D20092E4A8 /* SecureVault */;
 		};
@@ -88,6 +89,7 @@
 		44D1D1752DAE88D20092E4A8 = {
 			isa = PBXGroup;
 			children = (
+				44B430AC2DB0867A00647602 /* SecureVault-Info.plist */,
 				44D1D1802DAE88D20092E4A8 /* SecureFileVault */,
 				44D1D1902DAE88D30092E4A8 /* SecureVaultTests */,
 				44D1D19A2DAE88D30092E4A8 /* SecureVaultUITests */,
@@ -419,6 +421,7 @@
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SecureVault-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -448,6 +451,7 @@
 				DEVELOPMENT_TEAM = W7UQ5S3Y6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SecureVault-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -12,4 +12,5 @@ struct FileModel: Identifiable {
     let name: String
     let encryptedData: Data
     let dateAdded: Date
+    let isScanned: Bool = false // Default value for isScanned
 }

@@ -21,7 +21,7 @@ struct SplashScreenView: View {
                     .ignoresSafeArea()
 
                 if showCreatorLogo {
-                    Image("CompanyLogo.png") // Ensure this is in Assets.xcassets
+                    Image("CompanyLogo") // Ensure this is in Assets.xcassets
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
@@ -57,3 +57,35 @@ struct SplashScreenView: View {
         }
     }
 }
+
+struct WelcomeView: View {
+    let username: String
+    @State private var navigateToMainTab = false
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Welcome, \(username)!")
+                    .font(.largeTitle)
+                    .padding()
+
+                NavigationLink(
+                    destination: MainTabView(),
+                    isActive: $navigateToMainTab
+                ) {
+                    Button("Continue") {
+                        navigateToMainTab = true
+                    }
+                }
+            }
+        }
+    }
+}
+
+#if DEBUG
+struct SplashScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+        SplashScreenView()
+    }
+}
+#endif

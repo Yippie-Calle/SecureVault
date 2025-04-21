@@ -4,20 +4,22 @@
 //
 //  Created by Bryan Calle on 4/15/25.
 //
-
 import Foundation
+import Foundation
+import CryptoKit
 
 class FileVaultViewModel: ObservableObject {
     @Published var files: [FileModel] = []
 
-    func importFile() {
-        // Example implementation for importing a file
-        let newFile = FileModel(
-            id: UUID(),
-            name: "New File",
-            encryptedData: Data(),
-            dateAdded: Date()
-        )
-        files.append(newFile)
+    // Symmetric key for encryption (securely initialized)
+    let encryptionKey: SymmetricKey
+
+    init() {
+        // Generate a symmetric key (in a real app, securely store/retrieve this key)
+        encryptionKey = SymmetricKey(size: .bits256)
+    }
+
+    func deleteFile(_ file: FileModel) {
+        files.removeAll { $0.id == file.id }
     }
 }

@@ -33,3 +33,10 @@ struct NotesVaultView: View {
         }
     }
 }
+#if DEBUG
+struct NotesVaultView_Previews: PreviewProvider {
+    static var previews: some View {
+        NotesVaultView()
+    }
+}
+#endif
