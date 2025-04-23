@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject private var notesViewModel = NotesVaultViewModel()
+
     var body: some View {
         TabView {
             FileVaultView()
@@ -16,6 +18,7 @@ struct MainTabView: View {
                 }
 
             NotesVaultView()
+                .environmentObject(notesViewModel)
                 .tabItem {
                     Label("Notes", systemImage: "note.text")
                 }

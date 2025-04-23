@@ -6,14 +6,17 @@
 //
 import Foundation
 
-struct NoteModel: Identifiable {
+struct NoteModel: Identifiable, Codable {
     let id: UUID
-    let title: String
-    let content: String
+    var title: String
+    var content: String
+    var tags: [String]
     let dateAdded: Date
 
-    // Computed property for preview
     var preview: String {
-        content.prefix(50) + (content.count > 50 ? "..." : "")
+        if content.isEmpty {
+            return ""
+        }
+        return content.prefix(50) + (content.count > 50 ? "..." : "")
     }
 }

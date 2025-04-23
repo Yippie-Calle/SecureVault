@@ -7,85 +7,65 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct SplashScreenView: View {
-    @State private var showCreatorLogo = true
+    @StateObject private var authManager = AuthManager()
+    @State private var showCompanyLogo = true
     @State private var showAppLogo = false
-    @State private var navigateToMainView = false
+    @State private var navigateToNext = false
 
     var body: some View {
-        if navigateToMainView {
-            MainTabView() // Replace with your main view
-        } else {
-            ZStack {
-                Color.white // Background color
-                    .ignoresSafeArea()
-
-                if showCreatorLogo {
-                    Image("CompanyLogo") // Ensure this is in Assets.xcassets
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .transition(.opacity)
-                } else if showAppLogo {
-                    Text("SecureVault") // Placeholder for app logo
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .transition(.opacity)
+        NavigationStack {
+            if navigateToNext {
+                if authManager.isSignedIn {
+                    WelcomeView(username: authManager.currentUsername ?? "Guest")
+                } else {
+                    LoginOrCreateAccountView()
+                        .environmentObject(authManager)
                 }
-            }
-            .onAppear {
-                startSplashSequence()
+            } else {
+                ZStack {
+                    if showCompanyLogo {
+                        Image("CompanyLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                    } else if showAppLogo {
+                        Image("AppLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                    }
+                }
+                .onAppear {
+                    startSplashSequence()
+                }
             }
         }
     }
 
     private func startSplashSequence() {
-        // Show creator's logo for 2 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
-                showCreatorLogo = false
+                showCompanyLogo = false
                 showAppLogo = true
             }
 
-            // Show app's logo for 2 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation {
                     showAppLogo = false
-                    navigateToMainView = true
+                    navigateToNext = true
                 }
             }
         }
     }
 }
-
-struct WelcomeView: View {
-    let username: String
-    @State private var navigateToMainTab = false
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Welcome, \(username)!")
-                    .font(.largeTitle)
-                    .padding()
-
-                NavigationLink(
-                    destination: MainTabView(),
-                    isActive: $navigateToMainTab
-                ) {
-                    Button("Continue") {
-                        navigateToMainTab = true
-                    }
-                }
-            }
-        }
-    }
-}
-
 #if DEBUG
 struct SplashScreenView_Previews: PreviewProvider {
     static var previews: some View {
         SplashScreenView()
+            .environmentObject(AuthManager()) // Provide the required environment object
     }
 }
 #endif
