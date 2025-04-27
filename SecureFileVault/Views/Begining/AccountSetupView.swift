@@ -8,24 +8,50 @@
 import SwiftUI
 import LocalAuthentication
 
+// MARK: - AccountSetupView
+
+/// A view for setting up a new user account with personal information, account details, and preferences.
 struct AccountSetupView: View {
+    // MARK: - Environment Objects
+
+    /// The authentication manager for handling sign-in and authentication.
     @EnvironmentObject var authManager: AuthManager
+
+    // MARK: - State Properties
+
+    /// The user's name.
     @State private var name = ""
+
+    /// The reason for using the app.
     @State private var reason = ""
+
+    /// The username for the account.
     @State private var username = ""
+
+    /// The password for the account.
     @State private var password = ""
+
+    /// Whether to enable biometric authentication.
     @State private var useBiometrics = false
+
+    /// Whether to allow access on other devices.
     @State private var allowOtherDevices = false
+
+    /// Whether to navigate to the welcome screen.
     @State private var navigateToWelcome = false
+
+    // MARK: - Body
 
     var body: some View {
         NavigationView {
             Form {
+                // MARK: - Personal Information Section
                 Section(header: Text("Personal Information")) {
                     TextField("Name", text: $name)
                     TextField("Reason for using this app", text: $reason)
                 }
 
+                // MARK: - Account Details Section
                 Section(header: Text("Account Details")) {
                     TextField("Username", text: $username)
                     SecureField("Password", text: $password)
@@ -55,6 +81,7 @@ struct AccountSetupView: View {
                     }
                 }
 
+                // MARK: - Preferences Section
                 Section(header: Text("Preferences")) {
                     Toggle("Enable Face ID / Touch ID", isOn: $useBiometrics)
                         .onChange(of: useBiometrics) { newValue in
@@ -65,6 +92,7 @@ struct AccountSetupView: View {
                     Toggle("Allow access on other devices", isOn: $allowOtherDevices)
                 }
 
+                // MARK: - Create Account Button
                 Button("Create Account") {
                     if validatePassword() {
                         saveAccountDetails()
@@ -74,6 +102,7 @@ struct AccountSetupView: View {
                 }
                 .disabled(name.isEmpty || username.isEmpty || !validatePassword())
 
+                // MARK: - Navigation Link
                 NavigationLink(
                     destination: WelcomeView(username: username),
                     isActive: $navigateToWelcome
@@ -85,6 +114,10 @@ struct AccountSetupView: View {
         }
     }
 
+    // MARK: - Validation
+
+    /// Validates the password against specific requirements.
+    /// - Returns: A Boolean indicating whether the password is valid.
     private func validatePassword() -> Bool {
         let lengthRequirement = password.count >= 12
         let uppercaseRequirement = password.range(of: "[A-Z]", options: .regularExpression) != nil
@@ -94,12 +127,18 @@ struct AccountSetupView: View {
         return lengthRequirement && uppercaseRequirement && specialCharacterRequirement && numberRequirement
     }
 
+    // MARK: - Persistence
+
+    /// Saves the account details to `UserDefaults`.
     private func saveAccountDetails() {
         UserDefaults.standard.set(name, forKey: "userName")
         UserDefaults.standard.set(username, forKey: "userUsername")
         UserDefaults.standard.set(allowOtherDevices, forKey: "allowOtherDevices")
     }
 
+    // MARK: - Biometric Authentication
+
+    /// Authenticates the user using biometrics (Face ID / Touch ID).
     private func authenticateWithBiometrics() {
         let context = LAContext()
         var error: NSError?
@@ -128,6 +167,9 @@ struct AccountSetupView: View {
     }
 }
 
+// MARK: - PasswordRequirementRow
+
+/// A view that displays a password requirement and whether it is met.
 struct PasswordRequirementRow: View {
     let requirement: String
     let isMet: Bool
@@ -141,6 +183,9 @@ struct PasswordRequirementRow: View {
         }
     }
 }
+
+// MARK: - Previews
+
 #if DEBUG
 struct AccountSetupView_Previews: PreviewProvider {
     static var previews: some View {

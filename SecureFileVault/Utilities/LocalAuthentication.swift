@@ -7,9 +7,18 @@
 import SwiftUI
 import LocalAuthentication
 
+// MARK: - BiometricAuthManager
+
+/// A manager responsible for handling biometric authentication.
 class BiometricAuthManager: ObservableObject {
+    // MARK: - Published Properties
+
+    /// Indicates whether biometrics are enabled.
     @Published var useBiometrics: Bool = false
 
+    // MARK: - Authentication
+
+    /// Authenticates the user using biometrics (Face ID / Touch ID).
     func authenticateWithBiometrics() {
         let context = LAContext()
         var error: NSError?

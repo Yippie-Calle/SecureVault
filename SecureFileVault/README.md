@@ -17,17 +17,18 @@ A SwiftUI-based iOS application that allows users to securely store encrypted **
 - 📁 **Secure File Vault**: Import and encrypt files using AES-GCM (e.g., PDFs, images)
 - 📝 **Secure Notes Vault**: Create and encrypt text notes within the app
 - 🔑 **Key Management**: Secure key storage via iOS Keychain
-- ☁️ **Azure Integration (Coming Soon)**: Upload/download encrypted files to Azure Blob Storage
+- ☁️ **Azure Integration (In Progress)**: Upload/download encrypted files to Azure Blob Storage
+- 🔓 **Authentication**: Basic login and account creation functionality implemented
 
 ### 🛡 Security
 - AES-GCM encryption using `CryptoKit`
 - Local key protection via `Keychain`
-- Future: Face ID / Touch ID authentication
-- Future: Passcode and session timeout support
+- Planned: Face ID / Touch ID authentication
+- Planned: Passcode and session timeout support
 
 ### 🧩 Modular Design
-- Easy to extend and integrate into larger apps (like a ministry or productivity suite)
-- Separate models, view models, and services for clean architecture
+- Clean architecture with separate models, view models, and services
+- Easy to extend and integrate into larger apps (e.g., productivity or ministry apps)
 
 ---
 
@@ -45,17 +46,11 @@ A SwiftUI-based iOS application that allows users to securely store encrypted **
 
 ## 📦 Project Structure
 
-```├── Models/
-                                                                                                                                                                                        ├── Views/
-                                                                                                                                                                                        ├── ViewModels/
-                                                                                                                                                                                        ├── Services/
-                                                                                                                                                                                        ├── Resources/
-                                                                                                                                                                                        └── SecureVaultApp.swift
+
+```├── Models/ ├── Views/ ├── ViewModels/ ├── Services/ ├── Resources/ └── SecureVaultApp.swift
 
 ___
 
-
----
 
 ## 📸 Screenshots (Coming Soon)
 
@@ -65,7 +60,7 @@ Add demo images/gifs once features are complete.
 
 ## 🧠 Future Roadmap
 
-- [ ] Enable biometric authentication (Face ID / Touch ID)
+- [x] Enable biometric authentication (Face ID / Touch ID)
 - [ ] Add passcode lock and auto-timeout
 - [ ] Enable full Azure Blob Storage integration
 - [ ] Add search and sort features to vaults
