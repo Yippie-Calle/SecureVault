@@ -13,7 +13,7 @@ struct LoginOrCreateAccountView: View {
     // MARK: - Environment Objects
 
     /// The authentication manager for handling user authentication.
-    @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var userManager: UserManager
 
     // MARK: - State Properties
 
@@ -33,7 +33,7 @@ struct LoginOrCreateAccountView: View {
             if isCreatingAccount {
                 // MARK: - Account Creation View
                 AccountSetupView()
-                    .environmentObject(authManager)
+                    .environmentObject(userManager)
             } else {
                 // MARK: - Login View
                 VStack {
@@ -51,8 +51,8 @@ struct LoginOrCreateAccountView: View {
 
                     // MARK: - Log In Button
                     Button("Log In") {
-                        if authManager.validateCredentials(username: username, password: password) {
-                            authManager.signIn()
+                        if userManager.validateCredentials(username: username, password: password) {
+                            userManager.signIn(username: username) // Pass the username here
                         }
                     }
                     .disabled(username.isEmpty || password.isEmpty)
@@ -75,7 +75,7 @@ struct LoginOrCreateAccountView: View {
 struct LoginOrCreateAccountView_Previews: PreviewProvider {
     static var previews: some View {
         LoginOrCreateAccountView()
-            .environmentObject(AuthManager())
+            .environmentObject(UserManager())
     }
 }
 #endif

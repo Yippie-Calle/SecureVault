@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 // MARK: - SplashScreenView
 
 /// A view that displays a splash screen with animations before navigating to the next screen.
@@ -16,7 +14,7 @@ struct SplashScreenView: View {
     // MARK: - State Objects
 
     /// The authentication manager for handling user authentication.
-    @StateObject private var authManager = AuthManager()
+    @StateObject private var userManager = UserManager()
 
     // MARK: - State Properties
 
@@ -34,15 +32,9 @@ struct SplashScreenView: View {
     var body: some View {
         NavigationStack {
             if navigateToNext {
-                // MARK: - Navigation Logic
-                if authManager.isSignedIn {
-                    WelcomeView(username: authManager.currentUsername ?? "Guest")
-                } else {
-                    LoginOrCreateAccountView()
-                        .environmentObject(authManager)
-                }
+                LoginOrCreateAccountView()
+                    .environmentObject(userManager)
             } else {
-                // MARK: - Splash Screen Content
                 ZStack {
                     if showCompanyLogo {
                         Image("CompanyLogo")
@@ -75,7 +67,6 @@ struct SplashScreenView: View {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation {
-                    showAppLogo = false
                     navigateToNext = true
                 }
             }
@@ -89,7 +80,7 @@ struct SplashScreenView: View {
 struct SplashScreenView_Previews: PreviewProvider {
     static var previews: some View {
         SplashScreenView()
-            .environmentObject(AuthManager()) // Provide the required environment object
+            .environmentObject(UserManager()) // Provide the required environment object
     }
 }
 #endif

@@ -27,9 +27,11 @@ struct WelcomeView: View {
                     .padding()
 
                 // MARK: - Navigation Link
-                NavigationLink("Continue", destination: MainTabView())
+                NavigationLink("Continue", destination: MainTabView()
+                    .navigationBarBackButtonHidden(true))
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

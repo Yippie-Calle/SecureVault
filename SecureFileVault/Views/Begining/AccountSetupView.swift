@@ -15,7 +15,7 @@ struct AccountSetupView: View {
     // MARK: - Environment Objects
 
     /// The authentication manager for handling sign-in and authentication.
-    @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var userManager: UserManager
 
     // MARK: - State Properties
 
@@ -94,25 +94,26 @@ struct AccountSetupView: View {
 
                 // MARK: - Create Account Button
                 Button("Create Account") {
-                    if validatePassword() {
-                        saveAccountDetails()
-                        navigateToWelcome = true
-                        authManager.signIn()
+                                if validatePassword() {
+                                    saveAccountDetails()
+                                    navigateToWelcome = true
+                                    userManager.signIn(username: username)
+                                }
+                            }
+                            .disabled(name.isEmpty || username.isEmpty || !validatePassword())
+
+                            NavigationLink(
+                                destination: WelcomeView(username: username)
+                                    .navigationBarBackButtonHidden(true),
+                                isActive: $navigateToWelcome
+                            ) {
+                                EmptyView()
+                            }
+                        }
+                        .navigationTitle("Set Up Account")
+                        .navigationBarBackButtonHidden(true) // Hide back button in this view
                     }
                 }
-                .disabled(name.isEmpty || username.isEmpty || !validatePassword())
-
-                // MARK: - Navigation Link
-                NavigationLink(
-                    destination: WelcomeView(username: username),
-                    isActive: $navigateToWelcome
-                ) {
-                    EmptyView()
-                }
-            }
-            .navigationTitle("Set Up Account")
-        }
-    }
 
     // MARK: - Validation
 
@@ -190,7 +191,7 @@ struct PasswordRequirementRow: View {
 struct AccountSetupView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetupView()
-            .environmentObject(AuthManager())
+            .environmentObject(UserManager())
     }
 }
 #endif

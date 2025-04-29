@@ -11,8 +11,8 @@ import SwiftUI
 struct SecureVaultApp: App {
     var body: some Scene {
         WindowGroup {
-            SplashScreenView()
+            LoginOrCreateAccountView()
+                .environmentObject(UserManager())
         }
     }
 }
-
