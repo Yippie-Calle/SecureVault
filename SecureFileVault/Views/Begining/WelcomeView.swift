@@ -20,18 +20,40 @@ struct WelcomeView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 20) {
                 // MARK: - Welcome Message
                 Text("Welcome, \(username)!")
                     .font(.largeTitle)
-                    .padding()
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                    .accessibilityLabel("Welcome, \(username)")
+
+                // MARK: - Description
+                Text("We're glad to have you here. Tap continue to start using SecureVault.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
 
                 // MARK: - Navigation Link
-                NavigationLink("Continue", destination: MainTabView()
-                    .navigationBarBackButtonHidden(true))
+                NavigationLink(destination: MainTabView()
+                    .navigationBarBackButtonHidden(true)) {
+                    Text("Continue")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                .accessibilityLabel("Continue to the main application")
             }
+            .padding()
+            //.navigationTitle("Welcome")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 

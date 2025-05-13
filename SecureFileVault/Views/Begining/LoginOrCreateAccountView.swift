@@ -29,6 +29,12 @@ struct LoginOrCreateAccountView: View {
     /// A flag indicating whether login failed.
     @State private var loginFailed = false
 
+    /// Tracks the number of failed login attempts.
+    @State private var failedAttempts = 0
+
+    /// A flag to navigate to the password recovery view.
+    @State private var showPasswordRecovery = false
+
     // MARK: - Body
 
     var body: some View {
@@ -43,6 +49,7 @@ struct LoginOrCreateAccountView: View {
                             username = ""
                             password = ""
                             loginFailed = false
+                            failedAttempts = 0
                         }
                 } else {
                     // MARK: - Login View
@@ -82,8 +89,10 @@ struct LoginOrCreateAccountView: View {
                             if userManager.validateCredentials(username: username, password: password) {
                                 userManager.signIn(username: username)
                                 loginFailed = false
+                                failedAttempts = 0
                             } else {
                                 loginFailed = true
+                                failedAttempts += 1
                             }
                         }) {
                             Text("Log In")
@@ -96,6 +105,19 @@ struct LoginOrCreateAccountView: View {
                         .padding(.horizontal)
                         .disabled(username.isEmpty || password.isEmpty)
 
+                        // MARK: - Forgot Password Button
+                        if failedAttempts >= 3 {
+                            Button(action: {
+                                showPasswordRecovery = true
+                            }) {
+                                Text("Forgot your password?")
+                                    .foregroundColor(.blue)
+                            }
+                            .sheet(isPresented: $showPasswordRecovery) {
+                                PasswordRecoveryView()
+                            }
+                        }
+
                         // MARK: - Create Account Button
                         Button(action: {
                             isCreatingAccount = true
@@ -107,7 +129,7 @@ struct LoginOrCreateAccountView: View {
                     .padding()
                 }
             }
-            .navigationBarTitle(isCreatingAccount ? "Create Account" : "Log In", displayMode: .inline)
+            //.navigationBarTitle(isCreatingAccount ? "Create Account" : "Log In", displayMode: .inline)
         }
     }
 }

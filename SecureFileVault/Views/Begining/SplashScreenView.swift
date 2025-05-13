@@ -32,25 +32,31 @@ struct SplashScreenView: View {
     var body: some View {
         NavigationStack {
             if navigateToNext {
+                // MARK: - Navigation to Login or Create Account View
                 LoginOrCreateAccountView()
                     .environmentObject(userManager)
             } else {
+                // MARK: - Splash Screen Content
                 ZStack {
                     if showCompanyLogo {
                         Image("CompanyLogo")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200, height: 200)
+                            .transition(.opacity)
                     } else if showAppLogo {
                         Image("AppLogo")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200, height: 200)
+                            .transition(.opacity)
                     }
                 }
                 .onAppear {
                     startSplashSequence()
                 }
+                .background(Color(.systemBackground)) // Ensures the background matches system theme
+                .edgesIgnoringSafeArea(.all) // Extends the background to the edges
             }
         }
     }
@@ -60,13 +66,13 @@ struct SplashScreenView: View {
     /// Starts the splash screen animation sequence.
     private func startSplashSequence() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation {
+            withAnimation(.easeInOut(duration: 1)) {
                 showCompanyLogo = false
                 showAppLogo = true
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation {
+                withAnimation(.easeInOut(duration: 1)) {
                     navigateToNext = true
                 }
             }

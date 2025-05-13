@@ -46,15 +46,21 @@ struct AccountSetupView: View {
         NavigationView {
             Form {
                 // MARK: - Personal Information Section
-                Section(header: Text("Personal Information")) {
+                Section(header: Text("Personal Information").font(.headline)) {
                     TextField("Name", text: $name)
+                        .textContentType(.name)
+                        .autocapitalization(.words)
                     TextField("Reason for using this app", text: $reason)
+                        .autocapitalization(.sentences)
                 }
 
                 // MARK: - Account Details Section
-                Section(header: Text("Account Details")) {
+                Section(header: Text("Account Details").font(.headline)) {
                     TextField("Username", text: $username)
+                        .textContentType(.username)
+                        .autocapitalization(.none)
                     SecureField("Password", text: $password)
+                        .textContentType(.newPassword)
                         .onChange(of: password) { _ in
                             // Trigger validation on password change
                         }
@@ -82,7 +88,7 @@ struct AccountSetupView: View {
                 }
 
                 // MARK: - Preferences Section
-                Section(header: Text("Preferences")) {
+                Section(header: Text("Preferences").font(.headline)) {
                     Toggle("Enable Face ID / Touch ID", isOn: $useBiometrics)
                         .onChange(of: useBiometrics) { newValue in
                             if newValue {
@@ -93,27 +99,35 @@ struct AccountSetupView: View {
                 }
 
                 // MARK: - Create Account Button
-                Button("Create Account") {
-                                if validatePassword() {
-                                    saveAccountDetails()
-                                    navigateToWelcome = true
-                                    userManager.signIn(username: username)
-                                }
-                            }
-                            .disabled(name.isEmpty || username.isEmpty || !validatePassword())
-
-                            NavigationLink(
-                                destination: WelcomeView(username: username)
-                                    .navigationBarBackButtonHidden(true),
-                                isActive: $navigateToWelcome
-                            ) {
-                                EmptyView()
-                            }
-                        }
-                        .navigationTitle("Set Up Account")
-                        .navigationBarBackButtonHidden(true) // Hide back button in this view
+                Button(action: {
+                    if validatePassword() {
+                        saveAccountDetails()
+                        navigateToWelcome = true
+                        userManager.signIn(username: username)
                     }
+                }) {
+                    Text("Create Account")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(name.isEmpty || username.isEmpty || !validatePassword() ? Color.gray : Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
+                .disabled(name.isEmpty || username.isEmpty || !validatePassword())
+
+                // MARK: - Navigation Link
+                NavigationLink(
+                    destination: WelcomeView(username: username)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $navigateToWelcome
+                ) {
+                    EmptyView()
+                }
+            }
+            .navigationTitle("Set Up Account")
+            .navigationBarBackButtonHidden(true)
+        }
+    }
 
     // MARK: - Validation
 

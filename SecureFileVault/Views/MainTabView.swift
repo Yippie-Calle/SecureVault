@@ -25,6 +25,7 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Files", systemImage: "folder.fill")
                 }
+                .accessibilityLabel("File Vault Tab")
 
             // MARK: - Notes Vault Tab
             NotesVaultView()
@@ -32,13 +33,16 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Notes", systemImage: "note.text")
                 }
+                .accessibilityLabel("Notes Vault Tab")
 
             // MARK: - Settings Tab
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
                 }
+                .accessibilityLabel("Settings Tab")
         }
+        .accentColor(.blue) // Ensures a consistent tab selection color
     }
 }
 

@@ -9,28 +9,28 @@ import SwiftUI
 
 // MARK: - NewNoteView
 
-/// A view for creating a new note with a title, content, and tags.
+/// A view for creating a new note with a title and content.
 struct NewNoteView: View {
-    // MARK: - Observed Objects
+    // MARK: - Environment Objects
 
-    /// The view model for managing notes in the vault.
-    @ObservedObject var viewModel: NotesVaultViewModel
-
-    // MARK: - Binding Properties
-
-    /// A binding to control the presentation state of the view.
-    @Binding var isPresented: Bool
+    /// The notes manager for handling note creation and storage.
+    @EnvironmentObject var notesManager: NotesManager
 
     // MARK: - State Properties
 
-    /// The title of the note.
-    @State private var title = ""
+    /// The title of the new note.
+    @State private var title: String = ""
 
-    /// The content of the note.
-    @State private var content = ""
+    /// The content of the new note.
+    @State private var content: String = ""
 
-    /// The tags associated with the note.
-    @State private var tags = ""
+    /// Tracks whether the note is being saved.
+    @State private var isSaving: Bool = false
+
+    /// Tracks whether the save button is disabled.
+    private var isSaveDisabled: Bool {
+        title.isEmpty || content.isEmpty
+    }
 
     // MARK: - Body
 
@@ -38,41 +38,68 @@ struct NewNoteView: View {
         NavigationView {
             Form {
                 // MARK: - Title Section
-                Section(header: Text("Title")) {
-                    TextField("Enter title", text: $title)
+                Section(header: Text("Title").font(.headline)) {
+                    TextField("Enter note title", text: $title)
+                        .textContentType(.none)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .accessibilityLabel("Note Title")
                 }
 
                 // MARK: - Content Section
-                Section(header: Text("Content")) {
+                Section(header: Text("Content").font(.headline)) {
                     TextEditor(text: $content)
                         .frame(minHeight: 200)
+                        .accessibilityLabel("Note Content")
                 }
 
-                // MARK: - Tags Section
-                Section(header: Text("Tags")) {
-                    TextField("Add tags (e.g., #work, #personal)", text: $tags)
+                // MARK: - Save Button
+                Section {
+                    Button(action: saveNote) {
+                        HStack {
+                            Spacer()
+                            if isSaving {
+                                ProgressView()
+                            } else {
+                                Text("Save Note")
+                                    .fontWeight(.bold)
+                            }
+                            Spacer()
+                        }
+                    }
+                    .disabled(isSaveDisabled)
+                    .foregroundColor(isSaveDisabled ? .gray : .blue)
+                    .accessibilityLabel("Save Note Button")
                 }
             }
             .navigationTitle("New Note")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 // MARK: - Cancel Button
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
-                        isPresented = false
+                        dismissView()
                     }
-                }
-
-                // MARK: - Save Button
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        let tagList = tags.split(separator: " ").map { String($0) }
-                        viewModel.createNewNote(title: title, content: content, tags: tagList)
-                        isPresented = false
-                    }
-                    .disabled(title.isEmpty || content.isEmpty)
+                    .accessibilityLabel("Cancel Button")
                 }
             }
         }
+    }
+
+    // MARK: - Actions
+
+    /// Saves the new note and dismisses the view.
+    private func saveNote() {
+        guard !isSaveDisabled else { return }
+        isSaving = true
+        notesManager.addNote(title: title, content: content)
+        isSaving = false
+        dismissView()
+    }
+
+    /// Dismisses the current view.
+    private func dismissView() {
+        // Add logic to dismiss the view, e.g., using a presentation mode binding.
     }
 }
 
@@ -81,7 +108,8 @@ struct NewNoteView: View {
 #if DEBUG
 struct NewNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteView(viewModel: NotesVaultViewModel(), isPresented: .constant(true))
+        NewNoteView()
+            .environmentObject(NotesManager())
     }
 }
 #endif

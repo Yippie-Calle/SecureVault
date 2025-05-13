@@ -21,39 +21,42 @@ struct NotesVaultView: View {
     /// A flag to control the presentation of the new note view.
     @State private var isPresentingNewNoteView = false
 
+    /// A state property to hold the selected note for editing.
+    @State private var selectedNote: NoteModel?
+
     // MARK: - Body
 
     var body: some View {
         NavigationView {
             // MARK: - Notes List
             List {
-                ForEach(viewModel.notes, id: \.id) { note in
+                ForEach(viewModel.notes) { note in
                     // MARK: - Navigation Link to Note Details
-                    NavigationLink(destination: NoteDetailsView(note: Binding(
-                        get: { viewModel.notes.first(where: { $0.id == note.id }) ?? note },
-                        set: { updatedNote in
-                            if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
-                                viewModel.notes[index] = updatedNote
+                    NavigationLink(
+                        destination: {
+                            if let bindingNote = binding(for: note) {
+                                NoteDetailsView(note: bindingNote)
                             }
-                        }
-                    ))) {
-                        VStack(alignment: .leading) {
-                            // MARK: - Note Title
-                            Text(note.title).bold()
+                        },
+                        label: {
+                            VStack(alignment: .leading) {
+                                // MARK: - Note Title
+                                Text(note.title).bold()
 
-                            // MARK: - Note Preview
-                            Text(note.preview)
-                                .font(.caption)
-                                .foregroundColor(.gray)
-
-                            // MARK: - Note Tags
-                            if !note.tags.isEmpty {
-                                Text(note.tags.joined(separator: ", "))
+                                // MARK: - Note Preview
+                                Text(note.preview)
                                     .font(.caption)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.gray)
+
+                                // MARK: - Note Tags
+                                if !note.tags.isEmpty {
+                                    Text(note.tags.joined(separator: ", "))
+                                        .font(.caption)
+                                        .foregroundColor(.blue)
+                                }
                             }
                         }
-                    }
+                    )
                 }
                 .onDelete(perform: viewModel.deleteNote) // MARK: - Delete Note
             }
@@ -68,9 +71,20 @@ struct NotesVaultView: View {
             }
             .sheet(isPresented: $isPresentingNewNoteView) {
                 // MARK: - New Note View
-                NewNoteView(viewModel: viewModel, isPresented: $isPresentingNewNoteView)
+                NewNoteView()
+                    .environmentObject(viewModel)
             }
         }
+    }
+
+    // MARK: - Helper Methods
+
+    /// Returns a binding to the given note if it exists in the view model's notes array.
+    private func binding(for note: NoteModel) -> Binding<NoteModel>? {
+        guard let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) else {
+            return nil
+        }
+        return $viewModel.notes[index]
     }
 }
 
