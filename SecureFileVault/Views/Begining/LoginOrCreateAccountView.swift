@@ -26,46 +26,89 @@ struct LoginOrCreateAccountView: View {
     /// A flag indicating whether the user is creating a new account.
     @State private var isCreatingAccount = false
 
+    /// A flag indicating whether login failed.
+    @State private var loginFailed = false
+
     // MARK: - Body
 
     var body: some View {
-        VStack {
-            if isCreatingAccount {
-                // MARK: - Account Creation View
-                AccountSetupView()
-                    .environmentObject(userManager)
-            } else {
-                // MARK: - Login View
-                VStack {
-                    // MARK: - Login Header
-                    Text("Have an account? Log in!")
-                        .font(.headline)
+        NavigationView {
+            VStack {
+                if isCreatingAccount {
+                    // MARK: - Account Creation View
+                    AccountSetupView()
+                        .environmentObject(userManager)
+                        .onDisappear {
+                            // Reset fields when returning from account creation
+                            username = ""
+                            password = ""
+                            loginFailed = false
+                        }
+                } else {
+                    // MARK: - Login View
+                    VStack(spacing: 20) {
+                        // MARK: - Header
+                        Image(systemName: "lock.shield.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                            .foregroundColor(.blue)
+                            .padding(.bottom, 20)
 
-                    // MARK: - Username Field
-                    TextField("Username", text: $username)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("SecureFileVault")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
 
-                    // MARK: - Password Field
-                    SecureField("Password", text: $password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        // MARK: - Username Field
+                        TextField("Username", text: $username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .padding(.horizontal)
 
-                    // MARK: - Log In Button
-                    Button("Log In") {
-                        if userManager.validateCredentials(username: username, password: password) {
-                            userManager.signIn(username: username) // Pass the username here
+                        // MARK: - Password Field
+                        SecureField("Password", text: $password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal)
+
+                        // MARK: - Error Message
+                        if loginFailed {
+                            Text("Invalid username or password.")
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
+
+                        // MARK: - Log In Button
+                        Button(action: {
+                            if userManager.validateCredentials(username: username, password: password) {
+                                userManager.signIn(username: username)
+                                loginFailed = false
+                            } else {
+                                loginFailed = true
+                            }
+                        }) {
+                            Text("Log In")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .padding(.horizontal)
+                        .disabled(username.isEmpty || password.isEmpty)
+
+                        // MARK: - Create Account Button
+                        Button(action: {
+                            isCreatingAccount = true
+                        }) {
+                            Text("Don't have an account? Create one")
+                                .foregroundColor(.blue)
                         }
                     }
-                    .disabled(username.isEmpty || password.isEmpty)
-
-                    // MARK: - Create Account Button
-                    Button("Don't have an account? Create one") {
-                        isCreatingAccount = true
-                    }
+                    .padding()
                 }
             }
+            .navigationBarTitle(isCreatingAccount ? "Create Account" : "Log In", displayMode: .inline)
         }
-        .padding()
-        .navigationBarBackButtonHidden(true)
     }
 }
 

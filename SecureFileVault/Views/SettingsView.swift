@@ -13,7 +13,8 @@ import LocalAuthentication
 /// A view for managing app settings, including appearance, account, preferences, and security.
 struct SettingsView: View {
     // MARK: - AppStorage Properties
-
+    /// The authentication manager for handling sign-in and authentication.
+    @EnvironmentObject var userManager: UserManager
     /// A flag to toggle dark mode.
     @AppStorage("isDarkMode") private var isDarkMode = false
 
@@ -69,6 +70,14 @@ struct SettingsView: View {
                         showAlert = true
                     }
                 }
+                // MARK: - Log Out Section
+                               Section {
+                                   Button("Log Out") {
+                                       userManager.signOut()
+                                   }
+                                   .foregroundColor(.red)
+                               }
+                           }
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)
             .navigationTitle("Settings")
@@ -77,7 +86,6 @@ struct SettingsView: View {
             }
         }
     }
-}
 
 // MARK: - Biometric Authentication
 
